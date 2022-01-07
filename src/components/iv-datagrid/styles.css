@@ -1,0 +1,73 @@
+/* For column headers */
+.MuiDataGrid-columnsContainer {
+    min-height: 30px !important;
+    max-height: 48px !important;
+    background-color: #33383D;
+    border-bottom: none !important;
+}
+
+.MuiDataGrid-columnsContainer > .MuiDataGrid-columnHeaderWrapper {
+    height: 100%;
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeaderTitle {
+    color: #fff;
+    font-weight: 600 !important;
+    text-transform: capitalize;
+}
+
+/* For hiding column separator */
+.MuiDataGrid-columnSeparator {
+    display: none !important;
+}
+
+/* For column header sort icon */
+.MuiDataGrid-root .MuiDataGrid-sortIcon {
+    fill: #fff !important;
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeader:not(.MuiDataGrid-columnHeader--sorted) .MuiDataGrid-sortIcon {
+    opacity: 0.5 !important;
+}
+
+/* For data grid bg color */
+.MuiDataGrid-root {
+    background-color: #fff;
+}
+
+/* For datagrid data body */
+.MuiDataGrid-root .MuiDataGrid-window {
+    top: 48px !important;
+}
+
+/* For drop down filter */
+.filter-dropdown-paper {
+    transform: translateX(103.5%) !important;
+    max-height: 264px;
+    scrollbar-color: #8F8F8F;
+    scrollbar-width: 4px;
+}
+
+.filter-dropdown-paper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.filter-dropdown-paper::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 8px;
+}
+
+.filter-dropdown-paper::-webkit-scrollbar-thumb {
+    background: #8F8F8F;
+    border-radius: 50rem;
+}
+
+.filter-dropdown-paper::-webkit-scrollbar-thumb:hover {
+    background: #696969;
+}
+
+/* For data grid cells */
+.MuiDataGrid-cell {
+    color: #25213B;
+    font-weight: 500;
+}
