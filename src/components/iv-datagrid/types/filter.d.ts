@@ -14,7 +14,7 @@ export interface CustomValuesFilter extends CommonKeys {
 }
 
 export interface PrefilledSelectableFilter extends CommonKeys {
-    type: "radio" | "checkbox" | "dropdown" | "dropdown-autocomplete" | "dropdown-autocomplete-arbitrary"
+    type: "radio" | "checkbox" | "dropdown" | "dropdown-autocomplete"
     options: readonly {
         value: any
         displayValue?: any

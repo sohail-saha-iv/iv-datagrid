@@ -8,7 +8,7 @@ import Radio from '@material-ui/core/Radio';
 import Popover from '@material-ui/core/Popover'
 import MenuItem from '@material-ui/core/MenuItem'
 import AutoComplete from "@material-ui/lab/Autocomplete"
-import { useMemo } from "react"
+import { useEffect, useMemo } from "react"
 import { toTitleCase } from './utils';
 
 // Function to find displayValue of a particular value
@@ -28,6 +28,10 @@ const getValue = (options, displayValueToFindValueOf) => {
 }
 
 export default function FiltersPopover({ getFilterButtonRef, filtersPopoverOpen, filtersData, onFiltersChange, setFiltersPopverOpen }) {
+    // TODO: REMOVE THIS
+    useEffect(() => {
+        console.log("FILTERS DATA CHANGED", filtersData)
+    }, [filtersData])
 
     // Reference to filter button
     const filterButtonRef = useMemo(() => getFilterButtonRef(), [])
@@ -117,26 +121,12 @@ export default function FiltersPopover({ getFilterButtonRef, filtersPopoverOpen,
 
                         {/* For drop down with autocomplete */}
                         {filterData.type === "dropdown-autocomplete" &&
-                            <AutoComplete fullWidth size="small" options={filterData.options} getOptionLabel={(option) => (option.displayValue || option.value)} renderInput={(params) => <TextField {...params} variant="outlined" size="small" />} onInputChange={
-                                (e, newValue) => {
+                            <AutoComplete fullWidth size="small" options={filterData.options} getOptionLabel={(option) => (option.displayValue || option.value || "")} renderInput={(params) => <TextField {...params} variant="outlined" size="small" />} value={{ value: filterData.currentValue || "", displayValue: filterData.displayCurrentValue || "" }} onChange={
+                                (e, { value, displayValue }) => {
                                     onFiltersChange({
                                         [fieldName]: {
-                                            value: getValue(filterData.options, newValue),
-                                            displayValue: newValue
-                                        }
-                                    })
-                                }
-                            } placeholder={toTitleCase(filterData.displayFieldName || fieldName)} />
-                        }
-
-                        {/* For drop down with autocomplete, allows for arbitrary values too */}
-                        {filterData.type === "dropdown-autocomplete-arbitrary" &&
-                            <AutoComplete freeSolo fullWidth size="small" options={filterData.options} getOptionLabel={(option) => (option.displayValue || option.value)} renderInput={(params) => <TextField {...params} variant="outlined" size="small" />} onInputChange={
-                                (e, newValue) => {
-                                    onFiltersChange({
-                                        [fieldName]: {
-                                            value: getValue(filterData.options, newValue) || newValue,
-                                            displayValue: newValue
+                                            value,
+                                            displayValue
                                         }
                                     })
                                 }
