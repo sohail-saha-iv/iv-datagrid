@@ -116,13 +116,26 @@ export default function FiltersPopover({ getFilterButtonRef, filtersPopoverOpen,
                         }
 
                         {/* For drop down with autocomplete */}
-                        {(filterData.type === "dropdown-autocomplete" ||
-                            filterData.type === "dropdown-autocomplete-arbitrary") &&
-                            <AutoComplete freeSolo={filterData.type === "dropdown-autocomplete-arbitrary"} fullWidth size="small" options={filterData.options} getOptionLabel={(option) => (option.displayValue || option.value)} renderInput={(params) => <TextField {...params} variant="outlined" size="small" />} onInputChange={
+                        {filterData.type === "dropdown-autocomplete" &&
+                            <AutoComplete fullWidth size="small" options={filterData.options} getOptionLabel={(option) => (option.displayValue || option.value)} renderInput={(params) => <TextField {...params} variant="outlined" size="small" />} onInputChange={
                                 (e, newValue) => {
                                     onFiltersChange({
                                         [fieldName]: {
                                             value: getValue(filterData.options, newValue),
+                                            displayValue: newValue
+                                        }
+                                    })
+                                }
+                            } placeholder={toTitleCase(filterData.displayFieldName || fieldName)} />
+                        }
+
+                        {/* For drop down with autocomplete, allows for arbitrary values too */}
+                        {filterData.type === "dropdown-autocomplete-arbitrary" &&
+                            <AutoComplete freeSolo fullWidth size="small" options={filterData.options} getOptionLabel={(option) => (option.displayValue || option.value)} renderInput={(params) => <TextField {...params} variant="outlined" size="small" />} onInputChange={
+                                (e, newValue) => {
+                                    onFiltersChange({
+                                        [fieldName]: {
+                                            value: getValue(filterData.options, newValue) || newValue,
                                             displayValue: newValue
                                         }
                                     })
